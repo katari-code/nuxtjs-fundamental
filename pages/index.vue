@@ -13,7 +13,18 @@
 <script>
 import homes from "../data/homes.json";
 export default {
-  components: { HomeCard },
+  head() {
+    return {
+      title: "Homepage",
+      meta: [
+        {
+          name: "descripiton",
+          content: "This is a homepage",
+          hid: "description",
+        },
+      ],
+    };
+  },
   data() {
     return {
       homes: homes.slice(0, 3),
