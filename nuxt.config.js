@@ -12,6 +12,8 @@ export default {
             charset: "utf-8"
         }]
     },
+    plugins: ['~/plugins/maps.client']
+    ,
     router: {
         prefetchLinks: false,
     }
