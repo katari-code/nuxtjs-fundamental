@@ -12,7 +12,7 @@ export default {
             charset: "utf-8"
         }]
     },
-    plugins: ['~/plugins/maps.client']
+    plugins: ['~/plugins/maps.client', '~/plugins/dataApi']
     ,
     router: {
         prefetchLinks: false,
