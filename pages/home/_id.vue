@@ -43,8 +43,8 @@ export default {
   },
 
   async asyncData({ params, $dataApi, error }) {
-    const response = await $dataApi.getHome(params.id);
-    if (!response.ok)
+    const homeResponse = await $dataApi.getHome(params.id);
+    if (!homeResponse.ok)
       return error({
         statusCode: response.status,
         messages: response.statusText,
