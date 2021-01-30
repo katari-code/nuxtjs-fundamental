@@ -1,6 +1,22 @@
 <template>
-  <span>
-    {{ displayText }}
+  <span
+    >{{ displayText }}
+    <button
+      v-if="isTooLong && !isExpanded"
+      @click="isExpanded = true"
+      class="link"
+      type="button"
+    >
+      read more
+    </button>
+    <button
+      v-if="isTooLong && isExpanded"
+      @click="isExpanded = false"
+      class="link"
+      type="button"
+    >
+      read less
+    </button>
   </span>
 </template>
 
@@ -8,35 +24,35 @@
 export default {
   data() {
     return {
-      isExpended: false,
+      isExpanded: false,
       chunks: [],
     };
   },
   props: {
     text: {
-      text: String,
+      type: String,
       required: true,
     },
     target: {
       type: Number,
       required: true,
     },
-    computed: {
-      isTooLong() {
-        return this.chunks.length === 2;
-      },
-      displayText() {
-        if (!this.isTooLong || this.isExpanded) return this.chunks.join("");
-        return this.chunks[0] + "...";
-      },
+  },
+  computed: {
+    isTooLong() {
+      return this.chunks.length === 2;
+    },
+    displayText() {
+      if (!this.isTooLong || this.isExpanded) return this.chunks.join(" ");
+      return this.chunks[0] + "...";
     },
   },
   created() {
-    this.chunks = this.getChuncks();
+    this.chunks = this.getChunks();
   },
   methods: {
-    getChuncks() {
-      const position = this.text.indexOf("", this.target);
+    getChunks() {
+      const position = this.text.indexOf(" ", this.target);
       if (this.text.length <= this.target || position === -1)
         return [this.text];
       return [this.text.substring(0, position), this.text.substring(position)];
@@ -44,3 +60,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.link {
+  color: blue;
+  background-color: white;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link:focus {
+  border: none;
+  outline: none;
+}
+</style>
