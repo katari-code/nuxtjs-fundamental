@@ -1,7 +1,7 @@
 {
   "name": "mastring-nuxt",
   "dependencies": {
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.15.4"
   },
   "scripts": {
     "dev": "nuxt",

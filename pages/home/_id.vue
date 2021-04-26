@@ -37,7 +37,6 @@
 
 <script>
 export default {
-  latyout: "default",
   head() {
     return {
       title: this.home.title,
