@@ -8,7 +8,8 @@ export default function (context, inject) {
     inject('dataApi', {
         getHome,
         getReviewsByHomeID,
-        getUserByHomeId
+        getUserByHomeId,
+        getHomesByLocation,
     })
     async function getHome(homeId) {
         try {
@@ -60,6 +61,24 @@ export default function (context, inject) {
         }
     }
 
+    async function getHomesByLocation(lat, lng, radiusInMeters = 1500 * 15) {
+        try {
+            return unWrap(await fetch(`https://${appId}-dsn.algolia.net/1/indexes/users/query`, {
+                headers,
+                method: 'POST',
+                body: JSON.stringify({
+                    aroundLatLng: `${lat},${lng}`,
+                    aroundRadius: radiusInMeters,
+                    hitsPerPage: 10,
+                    attributesToHighlight: [],
+                })
+            }))
+        } catch (error) {
+            return getErrorResponse(error)
+        }
+    }
+
+    
 
     function getErrorResponse(error) {
         return {
